@@ -13,13 +13,29 @@
  * @param anagram
  * @constructor
  */
-function MainController(anagram) {
+function MainController($scope, anagram) {
     var vm = this;
-    vm.fileContent = [];
-    vm.anagrams = anagram.createFromArray(vm.fileContent);
+
+    /**
+     * Reset words anagrams
+     */
+    vm.cleanWords = function() {
+        vm.fileContent = [];
+        vm.anagrams = anagram.create(vm.fileContent);
+    };
+    vm.cleanWords();
+
+    /**
+     * Update words anagrams with new file
+     * @param {Array[]} csv
+     */
+    $scope.updateAnagrams = function(csv) {
+        vm.fileContent = csv;
+        vm.anagrams = anagram.create(csv);
+    };
 }
 
-MainController.$inject = ['anagram'];
+MainController.$inject = ['$scope', 'anagram'];
 
 angular.module('wordsAnagramMatcherApp')
   .controller('MainCtrl', MainController);

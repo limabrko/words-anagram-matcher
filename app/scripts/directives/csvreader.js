@@ -14,6 +14,20 @@ function CsvReader() {
                 fileReader,
                 fileContent;
 
+            if (element.parent().hasClass('has-error')) {
+                element.parent().removeClass('has-error');
+                element.next().remove();
+            }
+
+            if (!isCsvFile(files[0])) {
+                element.parent().addClass('has-error');
+                var errorMsg = document.createElement('div');
+                errorMsg.innerHTML = 'File need to be a CSV format';
+                errorMsg.className = 'bg-danger';
+                element.parent().append(errorMsg);
+                return false;
+            }
+
             if (files.length) {
                 element.attr('disabled', true);
 
@@ -23,13 +37,22 @@ function CsvReader() {
                     fileContent = e.target.result;
 
                     $scope.$apply(function () {
-                        $scope.fileContent = convertDataToArray(fileContent);
+                        $scope.callback({csv: convertDataToArray(fileContent)});
                     });
                 };
 
                 fileReader.readAsText(files[0]);
             }
         });
+    }
+
+    /**
+     * Check if a file is CSV format
+     * @param {Object} file
+     * @returns {boolean}
+     */
+    function isCsvFile(file) {
+        return file.name.slice(-3).toLowerCase() === 'csv';
     }
 
     /**
@@ -55,13 +78,12 @@ function CsvReader() {
             }
         });
 
-        console.log(content);
         return content;
     }
 
     return {
         scope: {
-            fileContent: '='
+            callback: '&'
         },
         restrict: 'A',
         link: link

@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="jumbotron">
+        <h2>Select your CSV file:</h2>
+        <p>
+            <input type="file" name="csvFile" class="form-control" accept=".csv" file-content="vm.fileContent" csv-reader>
+        </p>
+        <p>
+            <div class="col-xs-12" ng-repeat="anagram in vm.anagrams">
+                <ul>
+                    <li ng-repeat="word in anagram">{{ word }}</li>
+                </ul>
+            </div>
+        </p>
+    </div>
+</div>
+
+<div class="row description">
+    <h3>What is an anagram?</h3>
+    <p>
+        An anagram is a rearrangement of the letters of one word or phrase to form another word or phrase.<br>
+        A example of an anagram is rearranging the letters of "Evil" to get "Vile".
+    </p>
+</div>

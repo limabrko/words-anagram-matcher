@@ -61,6 +61,7 @@ function Anagram() {
 
         data.forEach(function(line){
             line.forEach(function(word) {
+                word = cleanWord(word);
                 anagramKey = sorted(word);
                 if (!anagramKey.length) {
                     return;
@@ -71,10 +72,22 @@ function Anagram() {
                     return;
                 }
 
-                subsets[anagramKey].push(word);
+                if (subsets[anagramKey].indexOf(word) === -1) {
+                    subsets[anagramKey].push(word);
+                }
             });
         });
         return subsets;
+    }
+
+
+    /**
+     * Remove characters not allowed to display
+     * @param {String} str
+     * @returns {String}
+     */
+    function cleanWord(str) {
+        return str.replace(/[\"\']/g, "");
     }
 
     /**

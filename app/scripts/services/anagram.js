@@ -87,7 +87,7 @@ function Anagram() {
      * @returns {String}
      */
     function cleanWord(str) {
-        return str.replace(/[\"\']/g, "");
+        return str.replace(/[\"\']/g, '');
     }
 
     /**

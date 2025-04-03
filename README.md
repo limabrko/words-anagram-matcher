@@ -4,7 +4,7 @@ Given a dictionary of words, return the set of all words grouped into subsets of
 
 ## Demo page
 
-See how it works <a href="http://fill-lima.github.io/words-anagram-matcher" target="_blank">here</a>
+See how it works <a href="http://limabrko.github.io/words-anagram-matcher" target="_blank">here</a>
 
 ## Requirements
 
